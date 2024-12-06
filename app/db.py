@@ -1,10 +1,18 @@
-from sqlmodel import create_engine, Session
+from sqlmodel import create_engine, Session, SQLModel
+from . import config
 
-SQL_URL = 'postgresql://postgres.thcwwywdjkztbvpcjehu:[YOUR-PASSWORD]@aws-0-ap-south-1.pooler.supabase.com:6543/postgres'
+SQL_URL = config.setting.POSTGRES_URL
 
 engine = create_engine(SQL_URL)
 
 def get_db():
-    with Session(engine) as session:
+    try:
+        session = Session(engine)
+        print(f"Session created: {session}")  # Debugging
         yield session
+    finally:
+        print("Session closed")  # Debugging
+        session.close()
         
+def create_table():
+    SQLModel.metadata.create_all(engine)

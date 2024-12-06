@@ -7,11 +7,19 @@ class UserBase(SQLModel):
     email: EmailStr = Field(unique=True, index=True)
     username: str = Field(unique=True)
     
-class User(UserBase, table=True):
+class UserCreate(UserBase):
     password: str
+    
+class User(UserBase, table=True):
+    __tablename__ = 'users'
+    hashed_password: str
     id: uuid.UUID = Field(default_factory=uuid.uuid4, unique=True, primary_key=True)
     
 class UserPublic(SQLModel):
     id: uuid.UUID
     email: EmailStr
     username: str
+    
+class UserLogin(SQLModel):
+    email: EmailStr
+    password: str
