@@ -13,6 +13,7 @@ class UserCreate(UserBase):
 class User(UserBase, table=True):
     __tablename__ = 'users'
     hashed_password: str
+    is_verified: bool = False
     id: uuid.UUID = Field(default_factory=uuid.uuid4, unique=True, primary_key=True)
     
 class UserPublic(SQLModel):
@@ -31,3 +32,9 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     sub: uuid.UUID
     email: EmailStr
+    
+class PasswordResetReq(BaseModel):
+    email: EmailStr
+    
+class PasswordResetConfirm(BaseModel):
+    password: str

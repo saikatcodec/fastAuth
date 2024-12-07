@@ -1,5 +1,5 @@
 from sqlmodel import create_engine, Session, SQLModel
-from . import config
+from app import config
 
 SQL_URL = config.setting.POSTGRES_URL
 
