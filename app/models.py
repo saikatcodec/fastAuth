@@ -1,6 +1,6 @@
 import uuid
 from sqlmodel import Field, SQLModel
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr
 
 class UserBase(SQLModel):
     name: str | None = Field(default=False, max_length=255)
@@ -23,3 +23,11 @@ class UserPublic(SQLModel):
 class UserLogin(SQLModel):
     email: EmailStr
     password: str
+    
+class Token(BaseModel):
+    token: str
+    token_type: str
+    
+class TokenData(BaseModel):
+    sub: uuid.UUID
+    email: EmailStr
