@@ -1,4 +1,4 @@
-fastapi==0.115.6
+fastapi[standard]==0.115.6
 fastapi_mail==1.4.2
 itsdangerous==2.2.0
 passlib==1.7.4
@@ -7,3 +7,4 @@ pydantic_settings==2.6.1
 PyJWT==2.10.1
 sqlmodel==0.0.22
 starlette==0.41.3
+psycopg2-binary==2.9.10
